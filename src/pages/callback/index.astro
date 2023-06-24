@@ -1,0 +1,51 @@
+---
+import queryString from "query-string";
+import axios from "axios";
+import {
+  SPOTIFY_CLIENT_ID,
+  SPOTIFY_CLIENT_SECRET,
+  REDIRECT_URI,
+} from "../../util/constants.ts";
+import { getUser } from "../../api/spotify.ts";
+
+const code = Astro.url.searchParams.get("code");
+
+const authOptions = {
+  url: "https://accounts.spotify.com/api/token",
+  method: "post",
+  data: queryString.stringify({
+    code: code,
+    redirect_uri: REDIRECT_URI,
+    grant_type: "authorization_code",
+  }),
+  headers: {
+    Authorization:
+      "Basic " + btoa(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`),
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+};
+
+try {
+  const res = await axios(authOptions);
+  const access = res.data.access_token;
+  const refresh = res.data.refresh_token;
+
+  Astro.cookies.set("spinster_access_token", access);
+  Astro.cookies.set("spinster_refresh_token", refresh);
+} catch (error) {
+  console.error(error);
+}
+
+try {
+  const access = Astro.cookies.get("spinster_access_token").value;
+  const user = await getUser(access);
+
+  Astro.cookies.set("mixtify_user_name", user.display_name);
+  Astro.cookies.set("mixtify_user_img", user.images[0].url);
+} catch (error) {
+  console.error(error);
+  console.error("haha");
+}
+
+return Astro.redirect(`/songbook`);
+---

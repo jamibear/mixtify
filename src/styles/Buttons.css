@@ -1,0 +1,12 @@
+.btn-login {
+  padding: 0.5rem 1.5rem;
+  background: #151515;
+  border-radius: 99rem;
+  cursor: pointer;
+}
+
+.btn-login:hover {
+  color: white;
+  background: #121212;
+  box-shadow: 0 5px 15px rgba(12, 12, 12, 0.9);
+}

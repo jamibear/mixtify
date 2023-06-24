@@ -1,0 +1,26 @@
+---
+import { getTrackList } from "../../api/spotify.ts";
+import Songbook from "../../components/Songbook.tsx";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+let access_token = "";
+
+if (Astro.cookies.has("spinster_access_token")) {
+  access_token = Astro.cookies.get("spinster_access_token").value;
+}
+
+const trackList = await getTrackList(access_token);
+---
+
+<!-- {
+    trackList.items.map((track) => (
+      <p>
+        {track.name}
+        {track.duration_ms}
+        {track.artists[0].name}
+      </p>
+    ))
+  } -->
+<MainLayout>
+  <Songbook trackList={trackList} client:load />
+</MainLayout>

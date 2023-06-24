@@ -1,0 +1,26 @@
+---
+import { getTopArtists } from "../../api/spotify.ts";
+import TopArtist from "../../components/TopArtist.tsx";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+let access_token = "";
+
+if (Astro.cookies.has("spinster_access_token")) {
+  access_token = Astro.cookies.get("spinster_access_token").value;
+}
+
+const topArtists = await getTopArtists(access_token);
+---
+
+<!-- {
+    trackList.items.map((track) => (
+      <p>
+        {track.name}
+        {track.duration_ms}
+        {track.artists[0].name}
+      </p>
+    ))
+  } -->
+<MainLayout>
+  <TopArtist topArtists={topArtists} client:load />
+</MainLayout>

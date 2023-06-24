@@ -1,0 +1,10 @@
+.title {
+  text-align: center;
+  margin: 3rem 0;
+  font-size: 2rem;
+}
+
+.cover {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}

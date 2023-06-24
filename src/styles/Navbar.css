@@ -1,0 +1,53 @@
+nav {
+  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 0;
+  background: rgba(3, 3, 3, 0.3);
+}
+
+.logo {
+  font-family: "Bagel Fat One";
+  font-size: 1.5rem;
+}
+
+.nav-container {
+  margin: 0 auto;
+  max-width: 1000px;
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+
+.nav-link {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  cursor: pointer;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-link li:hover {
+  color: pink;
+}
+
+.avi {
+  width: 2rem;
+  border-radius: 99rem;
+}
+
+.user-badge {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #151515;
+  padding: 0.5rem 1rem;
+  border-radius: 99rem;
+}
+
+.name {
+  font-weight: bold;
+}
